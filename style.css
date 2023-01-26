@@ -1,0 +1,69 @@
+.scrollable {
+    height: 500px;
+    overflow: scroll;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  }
+  .chartMenu {
+    width: 100vw;
+    height: 40px;
+    background: #ff8000;
+    color: rgb(255, 213, 0);
+  }
+  .chartMenu p {
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+  }
+  .chartCard {
+    width: 100vw;
+    height: calc(100vh - 40px);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .chartBox {
+    width: 1000px;
+    padding: 20px;
+    border-radius: 10px;
+    border: solid 3px rgb(238, 255, 0);
+    background: rgb(255, 65, 132);
+  }
+
+  body {
+    background-color: rgb(179, 0, 255);
+    text-align: center;
+  }
+
+  button {
+      background-color: #5a1eff; /* Green */
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+
+      
+      
+      
+      
+      border-radius: 12px;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+      cursor: pointer;
+      margin: auto;
+      border: 2px solid #000000; 
+      margin: 0 auto;
+    }
+
+    button:hover{
+      background-color: #0d6efd;
+      color: #D5D5D5;
+      border: 1px solid #3e73bd;
+  }
