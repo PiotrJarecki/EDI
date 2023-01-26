@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> Car Dealership </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" 
+    crossorigin="anonymous">
+</head>
+<body>
+  <div class="chartMenu">
+    <p>Piotr Jarecki 227277</p>
+  </div>
+    <h1 class="text-center">Car Dealership</h1>
+    
+    <button class="button" onclick="f1()">Dealer 1</button>
+    <button class="button" onclick="f2()">Dealer 2</button>
+    <button class="button" onclick="f3()">Dealer 3</button>
+  
+    <div class="container">
+    <div class="scrollable" >
+    <table class="table table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Car brand</th>
+            <th scope="col">Car Model</th>
+            <th scope="col">Price</th>
+            <th scope="col">Year of model</th>
+            <th scope="col">Month</th>
+            <th scope="col">Color</th>
+            <th scope="col">Sold Cars</th>
+          </tr>
+        </thead>
+        <tbody id="table_body">   
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <hr>
+  
+    <div class="chartCard">
+      <div class="chartBox">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+
+    <div class="chartCard">
+      <div class="chartBox">
+        <canvas id="myChart2"></canvas>
+        
+      </div>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+  
+// ---------------------------------------------F-U-N-K-C-J-A--------------------------
+function f1(){
+  updateChart1('CarDealer1.json')
+  updateChart2('CarDealer1.json')
+  fetchTabela('CarDealer1.json')
+}
+function f2(){
+  updateChart1('CarDealer2.json')
+  updateChart2('CarDealer2.json')
+  fetchTabela('CarDealer2.json')
+}
+function f3(){
+  updateChart1('CarDealer3.json')
+  updateChart2('CarDealer3.json')
+  fetchTabela('CarDealer3.json')
+}
+
+
+// ------------------------------------------C-H-A-R-T-----1-1-1-1-1-1---------
+function updateChart1(val){
+  async function fetchData1() {
+    const response = await fetch(val);
+    const datapoints = await response.json();
+    console.log(datapoints);
+    return datapoints;
+  };
+
+  fetchData1().then(datapoints => {
+    const cardata = datapoints.slice(0,12).map(
+      function(index){
+        return index.Month
+      });
+
+      const branddata = datapoints.slice(0,12).map(
+      function(index){
+        return index.Car_brand
+      });
+
+      console.log(cardata);
+      
+      
+      myChart.config.data.labels = cardata;
+      myChart.config.data.datasets[0].data = branddata;
+      myChart.config.data.datasets[0].label = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+      myChart.update();
+  })
+};
+
+  const data = {
+        labels: [],
+        datasets: [{
+          label: "Month",
+          data: [0,0,0,0,0,0,0,0,0,0,0,0],
+          backgroundColor: [
+            'rgba(255, 26, 104, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(0, 0, 0, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 26, 104, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(0, 0, 0, 1)'
+          ],
+          borderWidth: 1
+        }]
+      };
+
+      // config 
+      const config = {
+        type: 'bar',
+        data,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      };
+
+      // render init block
+      const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+      );
+    
+// ------------------------------------------C-H-A-R-T-----2-2-2-2-2---------
+function updateChart2(val2){
+  async function fetchData2() {
+    const response2 = await fetch(val2);
+    const datapoints2 = await response2.json();
+    console.log(datapoints2);
+    return datapoints2;
+  };
+
+  fetchData2().then(datapoints2 => {
+    const cardata = datapoints2.slice(0,10).map(
+      function(index2){
+        return index2.Car_model
+      });
+
+      const branddata = datapoints2.slice(0,10).map(
+      function(index2){
+        return index2.Year_of_model
+      });
+
+      console.log(cardata);
+      
+
+      myChart2.config.data.labels = cardata;
+      myChart2.config.data.datasets[0].data = branddata;
+      myChart2.config.data.datasets[0].label = [];
+      myChart2.update();
+  })
+};
+// setup 
+
+    const data2 = {
+    labels: [],
+    datasets: [{
+        label: "Month",
+        data: [2001,1991,1997,2002,2010,1998,1999,2007,2008,2006],
+        backgroundColor: [
+          'rgba(255, 0, 138, 1)',
+          'rgba(255, 232, 138, 1)',
+          'rgba(241, 252, 1, 1)',
+          'rgba(80, 255, 191, 1)',
+          'rgba(255, 102, 100, 1)',
+          'rgba(0, 0, 255, 1)',
+          'rgba(0, 10, 0, 0.5)',
+          'rgba(0, 195, 111, 1)',
+          'rgba(0, 255, 255, 1)',
+          'rgba(255, 0, 0, 1)',
+        ],
+        borderColor: [
+        'rgba(240, 126, 14, 1)',
+        ],
+        borderWidth: 1
+    }]
+    };
+
+    // config 
+    const config2 = {
+    type: 'doughnut',
+    data,
+    options: {
+        scales: {
+        y: {
+            beginAtZero: true
+        }
+        }
+    }
+    };
+
+    // render init block
+    const myChart2 = new Chart(
+    document.getElementById('myChart2'),
+    config2
+    );
+
+//-------------------------------T-A-B-E-L-A-----------------
+
+function fetchTabela(val3) {
+ fetch(val3).then((data)=>{
+    //console.log(data); - json format
+    return data.json(); //converted to object
+}).then((objectData)=>{
+    console.log(objectData[0].Car_model);
+
+    let tableData="";
+    objectData.map((values)=>{
+        tableData+=`<tr>
+        <td>${values.Car_brand}</td>
+        <td>${values.Car_model}</td>
+        <td>${values.Price}</td>
+        <td>${values.Year_of_model}</td>
+        <td>${values.Month}</td>
+        <td>${values.Color}</td>
+        <td>${values.Cars_sold}</td>
+      </tr>`;
+    });
+    document.getElementById("table_body").innerHTML=tableData;
+}).catch((err)=>{
+    console.log(err);
+  })
+}
+    
+</script>
+
+</body>
+</html>
